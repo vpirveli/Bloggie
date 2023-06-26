@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Bloggie.Web.Controllers
 {
-    [Authorize(Roles ="Admin")]
+    [Authorize(Roles = "Admin")]
     public class AdminTagsController : Controller
     {
 
@@ -25,18 +25,24 @@ namespace Bloggie.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddAsync(AddTagRequest request)
+        public async Task<IActionResult> AddAsync(AddTagRequest addTagRequest)
         {
+            ValidateAddTagRequest(addTagRequest);
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
             var tag = new Tag
             {
-                Name = request.Name,
-                DisplayName = request.DisplayName
+                Name = addTagRequest.Name,
+                DisplayName = addTagRequest.DisplayName
             };
 
             await _repository.AddAsync(tag);
 
             return RedirectToAction("List");
         }
+
 
         [HttpGet]
         public async Task<IActionResult> List()
@@ -108,6 +114,17 @@ namespace Bloggie.Web.Controllers
                 //Show an Error notification
             }
             return RedirectToAction("Edit", new { id });
+        }
+
+        private void ValidateAddTagRequest(AddTagRequest addTagRequest)
+        {
+            if(addTagRequest.Name != null && addTagRequest.DisplayName != null)
+            {
+                if(addTagRequest.Name == addTagRequest.DisplayName)
+                {
+                    ModelState.AddModelError("DisplayName", "Name cannot be the same as Display Name");
+                }
+            }
         }
     }
 }

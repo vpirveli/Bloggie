@@ -13,11 +13,13 @@
     {
         <table class="table">
             <thead>
-                <tr>Id</tr>
-                <tr>Name</tr>
-                <tr>DisplayName</tr>
-                <tr> </tr>
-                <tr> </tr>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>DisplayName</th>
+                    <th> </th>
+                    <th> </th>
+                </tr>
             </thead>
             <tbody>
                 @foreach (var tag in Model)
@@ -28,14 +30,14 @@
                         <td>@tag.DisplayName</td>
                         <td>
                             <a asp-area="" asp-controller="AdminTags"
-                               asp-action="Edit"
-                               asp-route-id="@tag.Id">Edit</a>
+                       asp-action="Edit"
+                       asp-route-id="@tag.Id">Edit</a>
                         </td>
                         <td>
                             <form method="post" action="/AdminTags/DeleteById">
                                 <input type="hidden" name="id" value="@tag.Id" />
                                 <button type="submit">Delete</button>
-                            </form> 
+                            </form>
                         </td>
                     </tr>
                 }
