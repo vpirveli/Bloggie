@@ -122,7 +122,7 @@ namespace Bloggie.Web.Controllers
             {
                 if(addTagRequest.Name == addTagRequest.DisplayName)
                 {
-                    ModelState.AddModelError("DisplayName", "Name cannot be the same as DisplayName");
+                    ModelState.AddModelError("DisplayName", "Name cannot be the same as Display Name");
                 }
             }
         }
