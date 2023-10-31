@@ -1,4 +1,6 @@
-﻿namespace Bloggie.Web.Models.Domain
+﻿#nullable disable
+
+namespace Bloggie.Web.Models.Domain
 {
     public class BlogPost
     {

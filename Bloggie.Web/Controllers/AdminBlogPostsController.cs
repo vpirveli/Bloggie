@@ -49,6 +49,7 @@ namespace Bloggie.Web.Controllers
                 Author = addBlogPostRequest.Author,
                 Visible = addBlogPostRequest.Visible
             };
+
             var selectedTags = new List<Tag>();
 
             foreach (var selectedTagId in addBlogPostRequest.SelectedTags)
